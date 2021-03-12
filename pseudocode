@@ -1,0 +1,45 @@
+function loadFile:Connect([file pathway].database)
+
+variable conciousness = database.cell.B3
+variable condition = database.cell.D5
+variable mentalState = database.cell.C10
+variable fitness = database.cell.B10
+variable morale = database.cell.B8
+variable maxFood = database.cell.C5
+variable maxDrink = database.cell.B5
+variable hunger = maxFood
+variable thirst = maxDrink
+variable displayMorale = "null"
+
+if fitness >= 150
+    maxFood and maxDrink = 500
+else 
+    maxFood and maxDrink = 400
+
+if morale >=1750
+    displayMorale = "VeryHigh"
+elseIf morale >= 1250
+    displayMorale = "High"
+elseIf morale >= 750
+    displayMorale = "Low"
+elseIf morale < 750
+    displayMorale = "Unmotivated"
+
+if displayMorale == "VeryHigh"
+    maxDrink and maxFood + 50
+elseIf displayMorale == "High"
+    maxDrink and maxFood + 20
+elseIf displayMorale == "Low"
+    maxFood and maxDrink + 0
+else
+    maxFood and maxDrink - 20
+
+function loadScreens:Connect([file pathway].screens) -// the "screens" referenced would be a folder containing images of each screen. //-
+function [pathway].screens.playScreen:load()
+function createButton playButton [location of the play button]
+variable playButton link:[pathway].screens.savesScreen()
+-//this would continue, loading screens and creating buttons on the pixel co-ordinates of the different button locations//-
+if conciousness < 100
+    function [pathway].screens.deathScreen:load()
+    function createButton homeButton [pixel co-ordinates centered under message saying "You have died"]
+    variable homeButton link:[pathway].screens.playScreen
